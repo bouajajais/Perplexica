@@ -1,35 +1,53 @@
 services:
-  searxng:
-    image: docker.io/searxng/searxng:latest
-    volumes:
-      - ./searxng:/etc/searxng:rw
-    ports:
-      - 4000:8080
-    networks:
-      - perplexica-network
+  tailscale:
+    image: tailscale/tailscale:latest
+    container_name: ts-perplexica
+    hostname: ${HOSTNAME:?Environment variable HOSTNAME must be set}
     restart: unless-stopped
+    dns:
+      - 100.100.100.100
+      - 1.1.1.1
+      - 9.9.9.9
+    volumes:
+      - ./config/tailscale:/config
+      - ./data/tailscale:/var/lib/tailscale
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - TS_AUTHKEY=${TS_AUTHKEY:?Environment variable TS_AUTHKEY must be set}?ephemeral=false
+      - "TS_EXTRA_ARGS=--advertise-tags=tag:container --reset"
+      - TS_SERVE_CONFIG=/config/tailscale.json
+      - TS_STATE_DIR=/var/lib/tailscale
+      - TS_USERSPACE=false
+    cap_add:
+      - net_admin
+    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
 
-  app:
-    image: itzcrazykns1337/perplexica:main
+  perplexica:
+    # image: itzcrazykns1337/perplexica:main
     build:
       context: .
       dockerfile: app.dockerfile
-    environment:
-      - SEARXNG_API_URL=http://searxng:8080
-      - DATA_DIR=/home/perplexica
-    ports:
-      - 3000:3000
-    networks:
-      - perplexica-network
-    volumes:
-      - backend-dbstore:/home/perplexica/data
-      - uploads:/home/perplexica/uploads
-      - ./config.toml:/home/perplexica/config.toml
+    container_name: perplexica
     restart: unless-stopped
+    network_mode: service:tailscale
+    volumes:
+      - ./data/perplexica/dbstore:/home/perplexica/data
+      - ./data/perplexica/uploads:/home/perplexica/uploads
+      - ./config.toml:/home/perplexica/config.toml
+    environment:
+      - SEARXNG_API_URL=https://${SEARXNG_HOSTNAME:?Environment variable HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
+      - OLLAMA_API_URL=https://${OLLAMA_HOSTNAME:?Environment variable OLLAMA_HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
+      - DATA_DIR=/home/perplexica
+    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
 
-networks:
-  perplexica-network:
-
-volumes:
-  backend-dbstore:
-  uploads:
+  watchtower:
+    image: containrrr/watchtower
+    container_name: perplexica-watchtower
+    command: --interval 21600 perplexica --scope perplexica
+    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
+    restart: unless-stopped
+    depends_on:
+      - perplexica
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

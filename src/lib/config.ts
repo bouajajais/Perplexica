@@ -89,7 +89,8 @@ export const getGeminiApiKey = () => loadConfig().MODELS.GEMINI.API_KEY;
 export const getSearxngApiEndpoint = () =>
   process.env.SEARXNG_API_URL || loadConfig().API_ENDPOINTS.SEARXNG;
 
-export const getOllamaApiEndpoint = () => loadConfig().MODELS.OLLAMA.API_URL;
+export const getOllamaApiEndpoint = () =>
+  process.env.OLLAMA_API_URL || loadConfig().MODELS.OLLAMA.API_URL;
 
 export const getOllamaApiKey = () => loadConfig().MODELS.OLLAMA.API_KEY;
 

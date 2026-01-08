@@ -1,80 +1,113 @@
-# 🚀 Perplexica - An AI-powered search engine 🔎 <!-- omit in toc -->
+# Perplexica 🔍
 
-<div align="center" markdown="1">
-   <sup>Special thanks to:</sup>
-   <br>
-   <br>
-   <a href="https://www.warp.dev/perplexica">
-      <img alt="Warp sponsorship" width="400" src="https://github.com/user-attachments/assets/775dd593-9b5f-40f1-bf48-479faff4c27b">
-   </a>
-
-### [Warp, the AI Devtool that lives in your terminal](https://www.warp.dev/perplexica)
-
-[Available for MacOS, Linux, & Windows](https://www.warp.dev/perplexica)
-
-</div>
-
-<hr/>
-
+[![GitHub Repo stars](https://img.shields.io/github/stars/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/ItzCrazyKns/Perplexica?style=social)](https://github.com/ItzCrazyKns/Perplexica/watchers)
+[![Docker Pulls](https://img.shields.io/docker/pulls/itzcrazykns1337/perplexica?color=blue)](https://hub.docker.com/r/itzcrazykns1337/perplexica)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ItzCrazyKns/Perplexica/blob/master/LICENSE)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ItzCrazyKns/Perplexica?color=green)](https://github.com/ItzCrazyKns/Perplexica/commits/master)
 [![Discord](https://dcbadge.limes.pink/api/server/26aArMy8tT?style=flat)](https://discord.gg/26aArMy8tT)
 
-![preview](.assets/perplexica-screenshot.png?)
+Perplexica is a **privacy-focused AI answering engine** that runs entirely on your own hardware. It combines knowledge from the vast internet with support for **local LLMs** (Ollama) and cloud providers (OpenAI, Claude, Groq), delivering accurate answers with **cited sources** while keeping your searches completely private.
 
-## Table of Contents <!-- omit in toc -->
-
-- [Overview](#overview)
-- [Preview](#preview)
-- [Features](#features)
-- [Installation](#installation)
-  - [Getting Started with Docker (Recommended)](#getting-started-with-docker-recommended)
-  - [Non-Docker Installation](#non-docker-installation)
-  - [Ollama Connection Errors](#ollama-connection-errors)
-  - [Lemonade Connection Errors](#lemonade-connection-errors)
-- [Using as a Search Engine](#using-as-a-search-engine)
-- [Using Perplexica's API](#using-perplexicas-api)
-- [Expose Perplexica to a network](#expose-perplexica-to-network)
-- [One-Click Deployment](#one-click-deployment)
-- [Upcoming Features](#upcoming-features)
-- [Support Us](#support-us)
-  - [Donations](#donations)
-- [Contribution](#contribution)
-- [Help and Support](#help-and-support)
-
-## Overview
-
-Perplexica is an open-source AI-powered searching tool or an AI-powered search engine that goes deep into the internet to find answers. Inspired by Perplexity AI, it's an open-source option that not just searches the web but understands your questions. It uses advanced machine learning algorithms like similarity searching and embeddings to refine results and provides clear answers with sources cited.
-
-Using SearxNG to stay current and fully open source, Perplexica ensures you always get the most up-to-date information without compromising your privacy.
+![preview](.assets/perplexica-screenshot.png)
 
 Want to know more about its architecture and how it works? You can read it [here](https://github.com/ItzCrazyKns/Perplexica/tree/master/docs/architecture/README.md).
 
-## Preview
+## ✨ Features
 
-![video-preview](.assets/perplexica-preview.gif)
+🤖 **Support for all major AI providers** - Use local LLMs through Ollama or connect to OpenAI, Anthropic Claude, Google Gemini, Groq, and more. Mix and match models based on your needs.
 
-## Features
+⚡ **Smart search modes** - Choose Speed Mode when you need quick answers, Balanced Mode for everyday searches, or Quality Mode for deep research.
 
-- **Local LLMs**: You can utilize local LLMs such as Qwen, DeepSeek, Llama, and Mistral.
-- **Two Main Modes:**
-  - **Copilot Mode:** (In development) Boosts search by generating different queries to find more relevant internet sources. Like normal search instead of just using the context by SearxNG, it visits the top matches and tries to find relevant sources to the user's query directly from the page.
-  - **Normal Mode:** Processes your query and performs a web search.
-- **Focus Modes:** Special modes to better answer specific types of questions. Perplexica currently has 6 focus modes:
-  - **All Mode:** Searches the entire web to find the best results.
-  - **Writing Assistant Mode:** Helpful for writing tasks that do not require searching the web.
-  - **Academic Search Mode:** Finds articles and papers, ideal for academic research.
-  - **YouTube Search Mode:** Finds YouTube videos based on the search query.
-  - **Wolfram Alpha Search Mode:** Answers queries that need calculations or data analysis using Wolfram Alpha.
-  - **Reddit Search Mode:** Searches Reddit for discussions and opinions related to the query.
-- **Current Information:** Some search tools might give you outdated info because they use data from crawling bots and convert them into embeddings and store them in a index. Unlike them, Perplexica uses SearxNG, a metasearch engine to get the results and rerank and get the most relevant source out of it, ensuring you always get the latest information without the overhead of daily data updates.
-- **API**: Integrate Perplexica into your existing applications and make use of its capibilities.
+🧭 **Pick your sources** - Search the web, discussions, or academic papers. More sources and integrations are in progress.
 
-It has many more features like image and video search. Some of the planned features are mentioned in [upcoming features](#upcoming-features).
+🧩 **Widgets** - Helpful UI cards that show up when relevant, like weather, calculations, stock prices, and other quick lookups.
+
+🔍 **Web search powered by SearxNG** - Access multiple search engines while keeping your identity private. Support for Tavily and Exa coming soon for even better results.
+
+📷 **Image and video search** - Find visual content alongside text results. Search isn't limited to just articles anymore.
+
+📄 **File uploads** - Upload documents and ask questions about them. PDFs, text files, images - Perplexica understands them all.
+
+🌐 **Search specific domains** - Limit your search to specific websites when you know where to look. Perfect for technical documentation or research papers.
+
+💡 **Smart suggestions** - Get intelligent search suggestions as you type, helping you formulate better queries.
+
+📚 **Discover** - Browse interesting articles and trending content throughout the day. Stay informed without even searching.
+
+🕒 **Search history** - Every search is saved locally so you can revisit your discoveries anytime. Your research is never lost.
+
+✨ **More coming soon** - We're actively developing new features based on community feedback. Join our Discord to help shape Perplexica's future!
+
+## Sponsors
+
+Perplexica's development is powered by the generous support of our sponsors. Their contributions help keep this project free, open-source, and accessible to everyone.
+
+<div align="center">
+  
+  
+<a href="https://www.warp.dev/perplexica">
+  <img alt="Warp Terminal" src=".assets/sponsers/warp.png" width="100%">
+</a>
+
+### **✨ [Try Warp - The AI-Powered Terminal →](https://www.warp.dev/perplexica)**
+
+Warp is revolutionizing development workflows with AI-powered features, modern UX, and blazing-fast performance. Used by developers at top companies worldwide.
+
+</div>
+
+---
+
+We'd also like to thank the following partners for their generous support:
+
+<table>
+  <tr>
+    <td width="100" align="center">
+      <a href="https://dashboard.exa.ai" target="_blank">
+        <img src=".assets/sponsers/exa.png" alt="Exa" width="80" height="80" style="border-radius: .75rem;" />
+      </a>
+    </td>
+    <td>
+      <a href="https://dashboard.exa.ai">Exa</a> • The Perfect Web Search API for LLMs - web search, crawling, deep research, and answer APIs
+    </td>
+  </tr>
+</table>
 
 ## Installation
 
 There are mainly 2 ways of installing Perplexica - With Docker, Without Docker. Using Docker is highly recommended.
 
 ### Getting Started with Docker (Recommended)
+
+Perplexica can be easily run using Docker. Simply run the following command:
+
+```bash
+docker run -d -p 3000:3000 -v perplexica-data:/home/perplexica/data --name perplexica itzcrazykns1337/perplexica:latest
+```
+
+This will pull and start the Perplexica container with the bundled SearxNG search engine. Once running, open your browser and navigate to http://localhost:3000. You can then configure your settings (API keys, models, etc.) directly in the setup screen.
+
+**Note**: The image includes both Perplexica and SearxNG, so no additional setup is required. The `-v` flags create persistent volumes for your data and uploaded files.
+
+#### Using Perplexica with Your Own SearxNG Instance
+
+If you already have SearxNG running, you can use the slim version of Perplexica:
+
+```bash
+docker run -d -p 3000:3000 -e SEARXNG_API_URL=http://your-searxng-url:8080 -v perplexica-data:/home/perplexica/data --name perplexica itzcrazykns1337/perplexica:slim-latest
+```
+
+**Important**: Make sure your SearxNG instance has:
+
+- JSON format enabled in the settings
+- Wolfram Alpha search engine enabled
+
+Replace `http://your-searxng-url:8080` with your actual SearxNG URL. Then configure your AI provider settings in the setup screen at http://localhost:3000.
+
+#### Advanced Setup (Building from Source)
+
+If you prefer to build from source or need more control:
 
 1. Ensure Docker is installed and running on your system.
 2. Clone the Perplexica repository:
@@ -85,39 +118,46 @@ There are mainly 2 ways of installing Perplexica - With Docker, Without Docker. 
 
 3. After cloning, navigate to the directory containing the project files.
 
-4. Rename the `sample.config.toml` file to `config.toml`. For Docker setups, you need only fill in the following fields:
-
-   - `OPENAI`: Your OpenAI API key. **You only need to fill this if you wish to use OpenAI's models**.
-   - `CUSTOM_OPENAI`: Your OpenAI-API-compliant local server URL, model name, and API key. You should run your local server with host set to `0.0.0.0`, take note of which port number it is running on, and then use that port number to set `API_URL = http://host.docker.internal:PORT_NUMBER`. You must specify the model name, such as `MODEL_NAME = "unsloth/DeepSeek-R1-0528-Qwen3-8B-GGUF:Q4_K_XL"`. Finally, set `API_KEY` to the appropriate value. If you have not defined an API key, just put anything you want in-between the quotation marks: `API_KEY = "whatever-you-want-but-not-blank"` **You only need to configure these settings if you want to use a local OpenAI-compliant server, such as Llama.cpp's [`llama-server`](https://github.com/ggml-org/llama.cpp/blob/master/tools/server/README.md)**.
-   - `OLLAMA`: Your Ollama API URL. You should enter it as `http://host.docker.internal:PORT_NUMBER`. If you installed Ollama on port 11434, use `http://host.docker.internal:11434`. For other ports, adjust accordingly. **You need to fill this if you wish to use Ollama's models instead of OpenAI's**.
-   - `LEMONADE`: Your Lemonade API URL. Since Lemonade runs directly on your local machine (not in Docker), you should enter it as `http://host.docker.internal:PORT_NUMBER`. If you installed Lemonade on port 8000, use `http://host.docker.internal:8000`. For other ports, adjust accordingly. **You need to fill this if you wish to use Lemonade's models**.
-   - `GROQ`: Your Groq API key. **You only need to fill this if you wish to use Groq's hosted models**.`
-   - `ANTHROPIC`: Your Anthropic API key. **You only need to fill this if you wish to use Anthropic models**.
-   - `Gemini`: Your Gemini API key. **You only need to fill this if you wish to use Google's models**.
-   - `DEEPSEEK`: Your Deepseek API key. **Only needed if you want Deepseek models.**
-   - `AIMLAPI`: Your AI/ML API key. **Only needed if you want to use AI/ML API models and embeddings.**
-
-     **Note**: You can change these after starting Perplexica from the settings dialog.
-
-   - `SIMILARITY_MEASURE`: The similarity measure to use (This is filled by default; you can leave it as is if you are unsure about it.)
-
-5. Ensure you are in the directory containing the `docker-compose.yaml` file and execute:
+4. Build and run using Docker:
 
    ```bash
-   docker compose up -d
+   docker build -t perplexica .
+   docker run -d -p 3000:3000 -v perplexica-data:/home/perplexica/data --name perplexica perplexica
    ```
 
-6. Wait a few minutes for the setup to complete. You can access Perplexica at http://localhost:3000 in your web browser.
+5. Access Perplexica at http://localhost:3000 and configure your settings in the setup screen.
 
 **Note**: After the containers are built, you can start Perplexica directly from Docker without having to open a terminal.
 
 ### Non-Docker Installation
 
-1. Install SearXNG and allow `JSON` format in the SearXNG settings.
-2. Clone the repository and rename the `sample.config.toml` file to `config.toml` in the root directory. Ensure you complete all required fields in this file.
-3. After populating the configuration run `npm i`.
-4. Install the dependencies and then execute `npm run build`.
-5. Finally, start the app by running `npm run start`
+1. Install SearXNG and allow `JSON` format in the SearXNG settings. Make sure Wolfram Alpha search engine is also enabled.
+2. Clone the repository:
+
+   ```bash
+   git clone https://github.com/ItzCrazyKns/Perplexica.git
+   cd Perplexica
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm i
+   ```
+
+4. Build the application:
+
+   ```bash
+   npm run build
+   ```
+
+5. Start the application:
+
+   ```bash
+   npm run start
+   ```
+
+6. Open your browser and navigate to http://localhost:3000 to complete the setup and configure your settings (API keys, models, SearxNG URL, etc.) in the setup screen.
 
 **Note**: Using Docker is recommended as it simplifies the setup process, especially for managing environment variables and dependencies.
 
@@ -199,13 +239,8 @@ Perplexica runs on Next.js and handles all API requests. It works right away on 
 
 ## Upcoming Features
 
-- [x] Add settings page
-- [x] Adding support for local LLMs
-- [x] History Saving features
-- [x] Introducing various Focus Modes
-- [x] Adding API support
-- [x] Adding Discover
-- [ ] Finalizing Copilot Mode
+- [ ] Adding more widgets, integrations, search sources
+- [ ] Adding authentication
 
 ## Support Us
 

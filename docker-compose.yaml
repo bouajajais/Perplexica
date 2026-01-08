@@ -24,7 +24,7 @@ services:
     labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
 
   perplexica:
-    # image: itzcrazykns1337/perplexica:main
+    # image: itzcrazykns1337/perplexica:latest
     build:
       context: .
       dockerfile: app.dockerfile

@@ -1,6 +1,6 @@
 services:
   tailscale:
-    image: tailscale/tailscale:latest
+    image: tailscale/tailscale:v1.92.5
     container_name: ts-perplexica
     hostname: ${HOSTNAME:?Environment variable HOSTNAME must be set}
     restart: unless-stopped
@@ -21,33 +21,22 @@ services:
       - TS_USERSPACE=false
     cap_add:
       - net_admin
-    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
 
   perplexica:
     # image: itzcrazykns1337/perplexica:latest
     build:
       context: .
-      dockerfile: app.dockerfile
+      dockerfile: Dockerfile
     container_name: perplexica
     restart: unless-stopped
     network_mode: service:tailscale
+    depends_on:
+      - tailscale
     volumes:
       - ./data/perplexica/dbstore:/home/perplexica/data
       - ./data/perplexica/uploads:/home/perplexica/uploads
       - ./config.toml:/home/perplexica/config.toml
     environment:
-      - SEARXNG_API_URL=https://${SEARXNG_HOSTNAME:?Environment variable HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
-      - OLLAMA_API_URL=https://${OLLAMA_HOSTNAME:?Environment variable OLLAMA_HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
+      - SEARXNG_API_URL=https://${SEARXNG_HOSTNAME:?Environment variable SEARXNG_HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
+      - OLLAMA_BASE_URL=https://${OLLAMA_HOSTNAME:?Environment variable OLLAMA_HOSTNAME must be set}.${DOMAIN:?Environment variable DOMAIN must be set}/
       - DATA_DIR=/home/perplexica
-    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
-
-  watchtower:
-    image: containrrr/watchtower
-    container_name: perplexica-watchtower
-    command: --interval 21600 perplexica --scope perplexica
-    labels: [ "com.centurylinklabs.watchtower.scope=perplexica" ]
-    restart: unless-stopped
-    depends_on:
-      - perplexica
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
